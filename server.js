@@ -8,6 +8,13 @@ openai.api_key = process.env.OPENAI_API_KEY;
 
 // Set up the Express app
 const app = express();
+// Serve static files from the public directory
+app.use(express.static("public"));
+
+// Render the index.html file when a GET request is made to the root URL
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
+});
 
 // Set up the API route for generating text
 app.post("/api/generate_text", async (req, res) => {
